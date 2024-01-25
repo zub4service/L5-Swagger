@@ -27,6 +27,7 @@ class GeneratorFactory
     public function make(string $documentation): Generator
     {
         $config = $this->configFactory->documentationConfig($documentation);
+        $config = overrideDocsPathByTenant($config);
 
         $paths = $config['paths'];
         $scanOptions = $config['scanOptions'] ?? [];
