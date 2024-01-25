@@ -35,10 +35,7 @@ class Config
         $actions = $request->route()->getAction();
         $documentation = $actions['l5-swagger.documentation'];
         $config = $this->configFactory->documentationConfig($documentation);
-
-        if ($config['tenancy_for_laravel']) {
-            $config = overrideDocsPathByTenant($config);
-        }
+        $config = overrideDocsPathByTenant($config);
 
         $request->offsetSet('documentation', $documentation);
         $request->offsetSet('config', $config);
