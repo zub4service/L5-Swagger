@@ -253,6 +253,12 @@ return [
         'validator_url' => null,
 
         /*
+         * Flag to tell if tenancy for laravel is enabled or not.
+         * Should be usefull for reteive json or yaml docs dynamically by tenants source path.
+        */
+        'tenancy_for_laravel' => true,
+
+        /*
          * Swagger UI configuration parameters
         */
         'ui' => [
