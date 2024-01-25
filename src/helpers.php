@@ -68,3 +68,23 @@ if (! function_exists('l5_swagger_asset')) {
         return route('l5-swagger.'.$documentation.'.asset', $asset, $useAbsolutePath).'?v='.md5_file($file);
     }
 }
+
+if (! function_exists('overrideDocsPathByTenant')) {
+    /**
+     * Returns back configuration array with overrided documentation.paths.docs path if multitenant enabled.
+     *
+     * @param  array  $configuration
+     * @return array
+     */
+    function overrideDocsPathByTenant(array $configuration)
+    {
+        $base_storage_path = base_path('storage') . DIRECTORY_SEPARATOR;
+        $inside_storage_path = str_replace($base_storage_path, '', $configuration['paths']['docs']);
+        $tenancy_storage_path = storage_path($inside_storage_path);
+        // @override docs path by tenant
+        $configuration['paths']['docs'] = storage_path($inside_storage_path);
+        unset($base_storage_path);
+        unset($inside_storage_path);
+        return $configuration;
+    }
+}
