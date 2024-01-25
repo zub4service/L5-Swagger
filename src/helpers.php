@@ -78,13 +78,18 @@ if (! function_exists('overrideDocsPathByTenant')) {
      */
     function overrideDocsPathByTenant(array $configuration)
     {
-        $base_storage_path = base_path('storage') . DIRECTORY_SEPARATOR;
-        $inside_storage_path = str_replace($base_storage_path, '', $configuration['paths']['docs']);
-        $tenancy_storage_path = storage_path($inside_storage_path);
-        // @override docs path by tenant
-        $configuration['paths']['docs'] = storage_path($inside_storage_path);
-        unset($base_storage_path);
-        unset($inside_storage_path);
+        if ($config['tenancy_for_laravel']) {
+
+            $base_storage_path = base_path('storage') . DIRECTORY_SEPARATOR;
+            $inside_storage_path = str_replace($base_storage_path, '', $configuration['paths']['docs']);
+            $tenancy_storage_path = storage_path($inside_storage_path);
+
+            // @override docs path by tenant
+            $configuration['paths']['docs'] = storage_path($inside_storage_path);
+            unset($base_storage_path);
+            unset($inside_storage_path);
+        }
+
         return $configuration;
     }
 }
