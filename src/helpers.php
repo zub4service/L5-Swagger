@@ -78,7 +78,7 @@ if (! function_exists('overrideDocsPathByTenant')) {
      */
     function overrideDocsPathByTenant(array $configuration)
     {
-        if ($config['tenancy_for_laravel']) {
+        if ($configuration['tenancy_for_laravel']) {
 
             $base_storage_path = base_path('storage') . DIRECTORY_SEPARATOR;
             $inside_storage_path = str_replace($base_storage_path, '', $configuration['paths']['docs']);
